@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
@@ -41,4 +42,9 @@ class Statement with _$Statement {
   }) = _Statement;
 
   factory Statement.fromJson(Map<String, Object?> json) => _$StatementFromJson(json);
+}
+
+List<Statement> parseStatement(String responseBody) {
+  final parsed = (jsonDecode(responseBody) as List).cast<Map<String, dynamic>>();
+  return parsed.map<Statement>((json) => Statement.fromJson(json)).toList();
 }

@@ -12,3 +12,5 @@
           final List<Statement> statement0 = await compute(parseStatement, response.body);
           print(statement0.first.description);
         },
+
+          // final response = await http.get(Uri.https('card-management-eajwtocuqa-as.a.run.app', '/v1/cards/1111111111111'));
