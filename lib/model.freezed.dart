@@ -449,11 +449,8 @@ Statement _$StatementFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Statement {
   String get description => throw _privateConstructorUsedError;
-  set description(String value) => throw _privateConstructorUsedError;
   String get statementDate => throw _privateConstructorUsedError;
-  set statementDate(String value) => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
-  set amount(double value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -544,11 +541,11 @@ class _$StatementImpl with DiagnosticableTreeMixin implements _Statement {
   factory _$StatementImpl.fromJson(Map<String, dynamic> json) => _$$StatementImplFromJson(json);
 
   @override
-  String description;
+  final String description;
   @override
-  String statementDate;
+  final String statementDate;
   @override
-  double amount;
+  final double amount;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -565,6 +562,15 @@ class _$StatementImpl with DiagnosticableTreeMixin implements _Statement {
       ..add(DiagnosticsProperty('amount', amount));
   }
 
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other.runtimeType == runtimeType && other is _$StatementImpl && (identical(other.description, description) || other.description == description) && (identical(other.statementDate, statementDate) || other.statementDate == statementDate) && (identical(other.amount, amount) || other.amount == amount));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, description, statementDate, amount);
+
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
@@ -579,19 +585,16 @@ class _$StatementImpl with DiagnosticableTreeMixin implements _Statement {
 }
 
 abstract class _Statement implements Statement {
-  factory _Statement({required String description, required String statementDate, required double amount}) = _$StatementImpl;
+  factory _Statement({required final String description, required final String statementDate, required final double amount}) = _$StatementImpl;
 
   factory _Statement.fromJson(Map<String, dynamic> json) = _$StatementImpl.fromJson;
 
   @override
   String get description;
-  set description(String value);
   @override
   String get statementDate;
-  set statementDate(String value);
   @override
   double get amount;
-  set amount(double value);
   @override
   @JsonKey(ignore: true)
   _$$StatementImplCopyWith<_$StatementImpl> get copyWith => throw _privateConstructorUsedError;

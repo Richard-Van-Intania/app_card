@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:app_card/model.dart';
 import 'package:app_card/provider.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -51,7 +55,20 @@ class _HomePageState extends ConsumerState<HomePage> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () async {
+          // final url = Uri.https('card-management-eajwtocuqa-as.a.run.app', '/v1/unbilled-statements', {'cardNumber': '4568111122223333'});
+          // final response = await http.get(Uri.https('card-management-eajwtocuqa-as.a.run.app', '/v1/cards/1111111111111'));
+          // final response = await http.get(Uri.https('card-management-eajwtocuqa-as.a.run.app', '/v1/unbilled-statements', {'cardNumber': '4568111122223333'}));
+          final response = await http.get(Uri.https('card-management-eajwtocuqa-as.a.run.app', '/v1/billed-statements', {'cardNumber': '4568111122223333', 'asOf': '092023'}));
+          // print('Response status: ${response.statusCode}');
+          // final json = jsonDecode(response.body) as List<Statement>;
+          // // final statement = Statement.fromJson(json);
+          // print(json.length);
+          // List<Statement> statement = (jsonDecode(response.body) as List).map((data) => Statement.fromJson(data)).toList();
+          // final List<Statement> statement = parseStatement(response.body);
+          final List<Statement> statement0 = await compute(parseStatement, response.body);
+          print(statement0.first.description);
+        },
       ),
     );
   }

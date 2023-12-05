@@ -11,3 +11,8 @@ Future<CardResponse> cardResponse(CardResponseRef ref) async {
   final json = jsonDecode(response.body) as Map<String, dynamic>;
   return CardResponse.fromJson(json);
 }
+
+List<Statement> parseStatement(String responseBody) {
+  final parsed = (jsonDecode(responseBody) as List).cast<Map<String, dynamic>>();
+  return parsed.map<Statement>((json) => Statement.fromJson(json)).toList();
+}

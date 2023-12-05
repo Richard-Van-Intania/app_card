@@ -32,7 +32,7 @@ class Card with _$Card {
   factory Card.fromJson(Map<String, Object?> json) => _$CardFromJson(json);
 }
 
-@unfreezed
+@freezed
 class Statement with _$Statement {
   factory Statement({
     required String description,
