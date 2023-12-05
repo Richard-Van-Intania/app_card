@@ -13,30 +13,30 @@ T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError('It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-User _$UserFromJson(Map<String, dynamic> json) {
-  return _User.fromJson(json);
+CardResponse _$CardResponseFromJson(Map<String, dynamic> json) {
+  return _CardResponse.fromJson(json);
 }
 
 /// @nodoc
-mixin _$User {
+mixin _$CardResponse {
   String get citizenId => throw _privateConstructorUsedError;
   List<Card> get cards => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
+  $CardResponseCopyWith<CardResponse> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UserCopyWith<$Res> {
-  factory $UserCopyWith(User value, $Res Function(User) then) = _$UserCopyWithImpl<$Res, User>;
+abstract class $CardResponseCopyWith<$Res> {
+  factory $CardResponseCopyWith(CardResponse value, $Res Function(CardResponse) then) = _$CardResponseCopyWithImpl<$Res, CardResponse>;
   @useResult
   $Res call({String citizenId, List<Card> cards});
 }
 
 /// @nodoc
-class _$UserCopyWithImpl<$Res, $Val extends User> implements $UserCopyWith<$Res> {
-  _$UserCopyWithImpl(this._value, this._then);
+class _$CardResponseCopyWithImpl<$Res, $Val extends CardResponse> implements $CardResponseCopyWith<$Res> {
+  _$CardResponseCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -63,16 +63,16 @@ class _$UserCopyWithImpl<$Res, $Val extends User> implements $UserCopyWith<$Res>
 }
 
 /// @nodoc
-abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
-  factory _$$UserImplCopyWith(_$UserImpl value, $Res Function(_$UserImpl) then) = __$$UserImplCopyWithImpl<$Res>;
+abstract class _$$CardResponseImplCopyWith<$Res> implements $CardResponseCopyWith<$Res> {
+  factory _$$CardResponseImplCopyWith(_$CardResponseImpl value, $Res Function(_$CardResponseImpl) then) = __$$CardResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String citizenId, List<Card> cards});
 }
 
 /// @nodoc
-class __$$UserImplCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$UserImpl> implements _$$UserImplCopyWith<$Res> {
-  __$$UserImplCopyWithImpl(_$UserImpl _value, $Res Function(_$UserImpl) _then) : super(_value, _then);
+class __$$CardResponseImplCopyWithImpl<$Res> extends _$CardResponseCopyWithImpl<$Res, _$CardResponseImpl> implements _$$CardResponseImplCopyWith<$Res> {
+  __$$CardResponseImplCopyWithImpl(_$CardResponseImpl _value, $Res Function(_$CardResponseImpl) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -80,7 +80,7 @@ class __$$UserImplCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$UserImpl
     Object? citizenId = null,
     Object? cards = null,
   }) {
-    return _then(_$UserImpl(
+    return _then(_$CardResponseImpl(
       citizenId: null == citizenId
           ? _value.citizenId
           : citizenId // ignore: cast_nullable_to_non_nullable
@@ -95,10 +95,10 @@ class __$$UserImplCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$UserImpl
 
 /// @nodoc
 @JsonSerializable()
-class _$UserImpl with DiagnosticableTreeMixin implements _User {
-  const _$UserImpl({required this.citizenId, required final List<Card> cards}) : _cards = cards;
+class _$CardResponseImpl with DiagnosticableTreeMixin implements _CardResponse {
+  const _$CardResponseImpl({required this.citizenId, required final List<Card> cards}) : _cards = cards;
 
-  factory _$UserImpl.fromJson(Map<String, dynamic> json) => _$$UserImplFromJson(json);
+  factory _$CardResponseImpl.fromJson(Map<String, dynamic> json) => _$$CardResponseImplFromJson(json);
 
   @override
   final String citizenId;
@@ -112,21 +112,21 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(citizenId: $citizenId, cards: $cards)';
+    return 'CardResponse(citizenId: $citizenId, cards: $cards)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'User'))
+      ..add(DiagnosticsProperty('type', 'CardResponse'))
       ..add(DiagnosticsProperty('citizenId', citizenId))
       ..add(DiagnosticsProperty('cards', cards));
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other.runtimeType == runtimeType && other is _$UserImpl && (identical(other.citizenId, citizenId) || other.citizenId == citizenId) && const DeepCollectionEquality().equals(other._cards, _cards));
+    return identical(this, other) || (other.runtimeType == runtimeType && other is _$CardResponseImpl && (identical(other.citizenId, citizenId) || other.citizenId == citizenId) && const DeepCollectionEquality().equals(other._cards, _cards));
   }
 
   @JsonKey(ignore: true)
@@ -136,20 +136,20 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$UserImplCopyWith<_$UserImpl> get copyWith => __$$UserImplCopyWithImpl<_$UserImpl>(this, _$identity);
+  _$$CardResponseImplCopyWith<_$CardResponseImpl> get copyWith => __$$CardResponseImplCopyWithImpl<_$CardResponseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UserImplToJson(
+    return _$$CardResponseImplToJson(
       this,
     );
   }
 }
 
-abstract class _User implements User {
-  const factory _User({required final String citizenId, required final List<Card> cards}) = _$UserImpl;
+abstract class _CardResponse implements CardResponse {
+  const factory _CardResponse({required final String citizenId, required final List<Card> cards}) = _$CardResponseImpl;
 
-  factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
+  factory _CardResponse.fromJson(Map<String, dynamic> json) = _$CardResponseImpl.fromJson;
 
   @override
   String get citizenId;
@@ -157,7 +157,7 @@ abstract class _User implements User {
   List<Card> get cards;
   @override
   @JsonKey(ignore: true)
-  _$$UserImplCopyWith<_$UserImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$CardResponseImplCopyWith<_$CardResponseImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 Card _$CardFromJson(Map<String, dynamic> json) {
@@ -440,4 +440,159 @@ abstract class _Card implements Card {
   @override
   @JsonKey(ignore: true)
   _$$CardImplCopyWith<_$CardImpl> get copyWith => throw _privateConstructorUsedError;
+}
+
+Statement _$StatementFromJson(Map<String, dynamic> json) {
+  return _Statement.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Statement {
+  String get description => throw _privateConstructorUsedError;
+  set description(String value) => throw _privateConstructorUsedError;
+  String get statementDate => throw _privateConstructorUsedError;
+  set statementDate(String value) => throw _privateConstructorUsedError;
+  double get amount => throw _privateConstructorUsedError;
+  set amount(double value) => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $StatementCopyWith<Statement> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $StatementCopyWith<$Res> {
+  factory $StatementCopyWith(Statement value, $Res Function(Statement) then) = _$StatementCopyWithImpl<$Res, Statement>;
+  @useResult
+  $Res call({String description, String statementDate, double amount});
+}
+
+/// @nodoc
+class _$StatementCopyWithImpl<$Res, $Val extends Statement> implements $StatementCopyWith<$Res> {
+  _$StatementCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? description = null,
+    Object? statementDate = null,
+    Object? amount = null,
+  }) {
+    return _then(_value.copyWith(
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      statementDate: null == statementDate
+          ? _value.statementDate
+          : statementDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      amount: null == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as double,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$StatementImplCopyWith<$Res> implements $StatementCopyWith<$Res> {
+  factory _$$StatementImplCopyWith(_$StatementImpl value, $Res Function(_$StatementImpl) then) = __$$StatementImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String description, String statementDate, double amount});
+}
+
+/// @nodoc
+class __$$StatementImplCopyWithImpl<$Res> extends _$StatementCopyWithImpl<$Res, _$StatementImpl> implements _$$StatementImplCopyWith<$Res> {
+  __$$StatementImplCopyWithImpl(_$StatementImpl _value, $Res Function(_$StatementImpl) _then) : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? description = null,
+    Object? statementDate = null,
+    Object? amount = null,
+  }) {
+    return _then(_$StatementImpl(
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      statementDate: null == statementDate
+          ? _value.statementDate
+          : statementDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      amount: null == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$StatementImpl with DiagnosticableTreeMixin implements _Statement {
+  _$StatementImpl({required this.description, required this.statementDate, required this.amount});
+
+  factory _$StatementImpl.fromJson(Map<String, dynamic> json) => _$$StatementImplFromJson(json);
+
+  @override
+  String description;
+  @override
+  String statementDate;
+  @override
+  double amount;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'Statement(description: $description, statementDate: $statementDate, amount: $amount)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'Statement'))
+      ..add(DiagnosticsProperty('description', description))
+      ..add(DiagnosticsProperty('statementDate', statementDate))
+      ..add(DiagnosticsProperty('amount', amount));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$StatementImplCopyWith<_$StatementImpl> get copyWith => __$$StatementImplCopyWithImpl<_$StatementImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$StatementImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Statement implements Statement {
+  factory _Statement({required String description, required String statementDate, required double amount}) = _$StatementImpl;
+
+  factory _Statement.fromJson(Map<String, dynamic> json) = _$StatementImpl.fromJson;
+
+  @override
+  String get description;
+  set description(String value);
+  @override
+  String get statementDate;
+  set statementDate(String value);
+  @override
+  double get amount;
+  set amount(double value);
+  @override
+  @JsonKey(ignore: true)
+  _$$StatementImplCopyWith<_$StatementImpl> get copyWith => throw _privateConstructorUsedError;
 }

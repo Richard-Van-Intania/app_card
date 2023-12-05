@@ -34,18 +34,18 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   void initState() {
     super.initState();
-    ref.listenManual(userProvider, (previous, next) {
+    ref.listenManual(cardResponseProvider, (previous, next) {
       print('debug');
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final AsyncValue<User> user = ref.watch(userProvider);
+    final AsyncValue<CardResponse> cardResponse = ref.watch(cardResponseProvider);
     return Scaffold(
       body: Center(
-        child: switch (user) {
-          AsyncData(:final value) => Text('Activity: ${value.citizenId}'),
+        child: switch (cardResponse) {
+          AsyncData(:final value) => Text('citizenId: ${value.citizenId}'),
           AsyncError() => const Text('Oops, something unexpected happened'),
           _ => const CircularProgressIndicator(),
         },

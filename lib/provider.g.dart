@@ -6,19 +6,18 @@ part of 'provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userHash() => r'7dd8d80f6a3eff80bd3514db27fc21330f2a3610';
+String _$cardResponseHash() => r'd10657482e777f90d96e5569b1d78ad0668a858e';
 
-/// See also [user].
-@ProviderFor(user)
-final userProvider = AutoDisposeFutureProvider<User>.internal(
-  user,
-  name: r'userProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$userHash,
+/// See also [cardResponse].
+@ProviderFor(cardResponse)
+final cardResponseProvider = AutoDisposeFutureProvider<CardResponse>.internal(
+  cardResponse,
+  name: r'cardResponseProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$cardResponseHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef UserRef = AutoDisposeFutureProviderRef<User>;
+typedef CardResponseRef = AutoDisposeFutureProviderRef<CardResponse>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

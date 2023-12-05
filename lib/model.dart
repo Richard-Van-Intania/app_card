@@ -5,13 +5,13 @@ part 'model.freezed.dart';
 part 'model.g.dart';
 
 @freezed
-class User with _$User {
-  const factory User({
+class CardResponse with _$CardResponse {
+  const factory CardResponse({
     required String citizenId,
     required List<Card> cards,
-  }) = _User;
+  }) = _CardResponse;
 
-  factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);
+  factory CardResponse.fromJson(Map<String, Object?> json) => _$CardResponseFromJson(json);
 }
 
 @freezed
@@ -30,4 +30,15 @@ class Card with _$Card {
   }) = _Card;
 
   factory Card.fromJson(Map<String, Object?> json) => _$CardFromJson(json);
+}
+
+@unfreezed
+class Statement with _$Statement {
+  factory Statement({
+    required String description,
+    required String statementDate,
+    required double amount,
+  }) = _Statement;
+
+  factory Statement.fromJson(Map<String, Object?> json) => _$StatementFromJson(json);
 }

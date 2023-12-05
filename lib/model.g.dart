@@ -6,12 +6,12 @@ part of 'model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
+_$CardResponseImpl _$$CardResponseImplFromJson(Map<String, dynamic> json) => _$CardResponseImpl(
       citizenId: json['citizenId'] as String,
       cards: (json['cards'] as List<dynamic>).map((e) => Card.fromJson(e as Map<String, dynamic>)).toList(),
     );
 
-Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) => <String, dynamic>{
+Map<String, dynamic> _$$CardResponseImplToJson(_$CardResponseImpl instance) => <String, dynamic>{
       'citizenId': instance.citizenId,
       'cards': instance.cards,
     };
@@ -40,4 +40,16 @@ Map<String, dynamic> _$$CardImplToJson(_$CardImpl instance) => <String, dynamic>
       'fullPay': instance.fullPay,
       'statementDate': instance.statementDate,
       'dueDate': instance.dueDate,
+    };
+
+_$StatementImpl _$$StatementImplFromJson(Map<String, dynamic> json) => _$StatementImpl(
+      description: json['description'] as String,
+      statementDate: json['statementDate'] as String,
+      amount: (json['amount'] as num).toDouble(),
+    );
+
+Map<String, dynamic> _$$StatementImplToJson(_$StatementImpl instance) => <String, dynamic>{
+      'description': instance.description,
+      'statementDate': instance.statementDate,
+      'amount': instance.amount,
     };
