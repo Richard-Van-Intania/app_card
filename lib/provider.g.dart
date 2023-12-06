@@ -19,7 +19,7 @@ final fetchCardListProvider = AutoDisposeFutureProvider<List<CardWithStatement>>
 );
 
 typedef FetchCardListRef = AutoDisposeFutureProviderRef<List<CardWithStatement>>;
-String _$fetchBilledStatementHash() => r'3ef69723241ca6a3a73598141b7a6f61b7f2cfa8';
+String _$billedStatementListHash() => r'1e904dce27c50809c4bde41e01b6bfddc6c038b0';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -42,33 +42,38 @@ class _SystemHash {
   }
 }
 
-/// See also [fetchBilledStatement].
-@ProviderFor(fetchBilledStatement)
-const fetchBilledStatementProvider = FetchBilledStatementFamily();
+abstract class _$BilledStatementList extends BuildlessAutoDisposeAsyncNotifier<List<Statement>> {
+  late final String cardNumber;
 
-/// See also [fetchBilledStatement].
-class FetchBilledStatementFamily extends Family<AsyncValue<List<Statement>>> {
-  /// See also [fetchBilledStatement].
-  const FetchBilledStatementFamily();
-
-  /// See also [fetchBilledStatement].
-  FetchBilledStatementProvider call(
+  FutureOr<List<Statement>> build(
     String cardNumber,
-    String asOf,
+  );
+}
+
+/// See also [BilledStatementList].
+@ProviderFor(BilledStatementList)
+const billedStatementListProvider = BilledStatementListFamily();
+
+/// See also [BilledStatementList].
+class BilledStatementListFamily extends Family<AsyncValue<List<Statement>>> {
+  /// See also [BilledStatementList].
+  const BilledStatementListFamily();
+
+  /// See also [BilledStatementList].
+  BilledStatementListProvider call(
+    String cardNumber,
   ) {
-    return FetchBilledStatementProvider(
+    return BilledStatementListProvider(
       cardNumber,
-      asOf,
     );
   }
 
   @override
-  FetchBilledStatementProvider getProviderOverride(
-    covariant FetchBilledStatementProvider provider,
+  BilledStatementListProvider getProviderOverride(
+    covariant BilledStatementListProvider provider,
   ) {
     return call(
       provider.cardNumber,
-      provider.asOf,
     );
   }
 
@@ -83,31 +88,25 @@ class FetchBilledStatementFamily extends Family<AsyncValue<List<Statement>>> {
   Iterable<ProviderOrFamily>? get allTransitiveDependencies => _allTransitiveDependencies;
 
   @override
-  String? get name => r'fetchBilledStatementProvider';
+  String? get name => r'billedStatementListProvider';
 }
 
-/// See also [fetchBilledStatement].
-class FetchBilledStatementProvider extends AutoDisposeFutureProvider<List<Statement>> {
-  /// See also [fetchBilledStatement].
-  FetchBilledStatementProvider(
+/// See also [BilledStatementList].
+class BilledStatementListProvider extends AutoDisposeAsyncNotifierProviderImpl<BilledStatementList, List<Statement>> {
+  /// See also [BilledStatementList].
+  BilledStatementListProvider(
     String cardNumber,
-    String asOf,
   ) : this._internal(
-          (ref) => fetchBilledStatement(
-            ref as FetchBilledStatementRef,
-            cardNumber,
-            asOf,
-          ),
-          from: fetchBilledStatementProvider,
-          name: r'fetchBilledStatementProvider',
-          debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$fetchBilledStatementHash,
-          dependencies: FetchBilledStatementFamily._dependencies,
-          allTransitiveDependencies: FetchBilledStatementFamily._allTransitiveDependencies,
+          () => BilledStatementList()..cardNumber = cardNumber,
+          from: billedStatementListProvider,
+          name: r'billedStatementListProvider',
+          debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$billedStatementListHash,
+          dependencies: BilledStatementListFamily._dependencies,
+          allTransitiveDependencies: BilledStatementListFamily._allTransitiveDependencies,
           cardNumber: cardNumber,
-          asOf: asOf,
         );
 
-  FetchBilledStatementProvider._internal(
+  BilledStatementListProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -115,66 +114,64 @@ class FetchBilledStatementProvider extends AutoDisposeFutureProvider<List<Statem
     required super.debugGetCreateSourceHash,
     required super.from,
     required this.cardNumber,
-    required this.asOf,
   }) : super.internal();
 
   final String cardNumber;
-  final String asOf;
 
   @override
-  Override overrideWith(
-    FutureOr<List<Statement>> Function(FetchBilledStatementRef provider) create,
+  FutureOr<List<Statement>> runNotifierBuild(
+    covariant BilledStatementList notifier,
   ) {
+    return notifier.build(
+      cardNumber,
+    );
+  }
+
+  @override
+  Override overrideWith(BilledStatementList Function() create) {
     return ProviderOverride(
       origin: this,
-      override: FetchBilledStatementProvider._internal(
-        (ref) => create(ref as FetchBilledStatementRef),
+      override: BilledStatementListProvider._internal(
+        () => create()..cardNumber = cardNumber,
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
         cardNumber: cardNumber,
-        asOf: asOf,
       ),
     );
   }
 
   @override
-  AutoDisposeFutureProviderElement<List<Statement>> createElement() {
-    return _FetchBilledStatementProviderElement(this);
+  AutoDisposeAsyncNotifierProviderElement<BilledStatementList, List<Statement>> createElement() {
+    return _BilledStatementListProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is FetchBilledStatementProvider && other.cardNumber == cardNumber && other.asOf == asOf;
+    return other is BilledStatementListProvider && other.cardNumber == cardNumber;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, cardNumber.hashCode);
-    hash = _SystemHash.combine(hash, asOf.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
-mixin FetchBilledStatementRef on AutoDisposeFutureProviderRef<List<Statement>> {
+mixin BilledStatementListRef on AutoDisposeAsyncNotifierProviderRef<List<Statement>> {
   /// The parameter `cardNumber` of this provider.
   String get cardNumber;
-
-  /// The parameter `asOf` of this provider.
-  String get asOf;
 }
 
-class _FetchBilledStatementProviderElement extends AutoDisposeFutureProviderElement<List<Statement>> with FetchBilledStatementRef {
-  _FetchBilledStatementProviderElement(super.provider);
+class _BilledStatementListProviderElement extends AutoDisposeAsyncNotifierProviderElement<BilledStatementList, List<Statement>> with BilledStatementListRef {
+  _BilledStatementListProviderElement(super.provider);
 
   @override
-  String get cardNumber => (origin as FetchBilledStatementProvider).cardNumber;
-  @override
-  String get asOf => (origin as FetchBilledStatementProvider).asOf;
+  String get cardNumber => (origin as BilledStatementListProvider).cardNumber;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

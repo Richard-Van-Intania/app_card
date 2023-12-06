@@ -34,6 +34,27 @@ Future<List<CardWithStatement>> fetchCardList(FetchCardListRef ref) async {
 }
 
 @riverpod
-Future<List<Statement>> fetchBilledStatement(FetchBilledStatementRef ref, String cardNumber, String asOf) async {
-  return [];
+class BilledStatementList extends _$BilledStatementList {
+  @override
+  Future<List<Statement>> build(String cardNumber) async {
+    final response = await http.get(Uri(
+      scheme: 'https',
+      host: 'card-management-eajwtocuqa-as.a.run.app',
+      path: '/v1/billed-statements',
+      queryParameters: {'cardNumber': cardNumber, 'asOf': '092023'},
+    ));
+    final List<Statement> billedStatement = await compute(parseStatement, response.body);
+    return billedStatement;
+  }
+
+  Future<List<Statement>> fetchBilledStatement(String cardNumber, String asOf) async {
+    final response = await http.get(Uri(
+      scheme: 'https',
+      host: 'card-management-eajwtocuqa-as.a.run.app',
+      path: '/v1/billed-statements',
+      queryParameters: {'cardNumber': cardNumber, 'asOf': '092023'},
+    ));
+    final List<Statement> billedStatement = await compute(parseStatement, response.body);
+    return billedStatement;
+  }
 }
