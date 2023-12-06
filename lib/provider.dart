@@ -32,3 +32,8 @@ Future<List<CardWithStatement>> fetchCardList(FetchCardListRef ref) async {
     return list;
   }
 }
+
+@riverpod
+Future<List<Statement>> fetchBilledStatement(FetchBilledStatementRef ref, String cardNumber, String asOf) async {
+  return [];
+}
