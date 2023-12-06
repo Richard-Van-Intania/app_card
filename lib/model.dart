@@ -48,3 +48,10 @@ List<Statement> parseStatement(String responseBody) {
   final parsed = (jsonDecode(responseBody) as List).cast<Map<String, dynamic>>();
   return parsed.map<Statement>((json) => Statement.fromJson(json)).toList();
 }
+
+class CardWithStatement {
+  CardWithStatement({required this.card, required this.unbilledStatement});
+  final Card card;
+  final List<Statement> unbilledStatement;
+  List<Statement> billedStatement = [];
+}

@@ -7,50 +7,28 @@ import 'model.dart';
 part 'provider.g.dart';
 
 @riverpod
-Future<CardResponse> cardResponse(CardResponseRef ref) async {
+Future<List<CardWithStatement>> fetchCardList(FetchCardListRef ref) async {
+  List<CardWithStatement> list = [];
   final response = await http.get(Uri(
     scheme: 'https',
     host: 'card-management-eajwtocuqa-as.a.run.app',
     path: '/v1/cards/1111111111111',
   ));
-  final json = jsonDecode(response.body) as Map<String, dynamic>;
-  return CardResponse.fromJson(json);
-}
-
-@riverpod
-class BilledStatementList extends _$BilledStatementList {
-  @override
-  List<Statement> build() {
-    return [];
-  }
-
-  Future<List<Statement>> fetch(String cardNumber, String asOf) async {
-    final response = await http.get(Uri(
-      scheme: 'https',
-      host: 'card-management-eajwtocuqa-as.a.run.app',
-      path: '/v1/billed-statements',
-      queryParameters: {'cardNumber': cardNumber, 'asOf': asOf},
-    ));
-    final List<Statement> statement = await compute(parseStatement, response.body);
-    return statement;
-  }
-}
-
-@riverpod
-class UnbilledStatementList extends _$UnbilledStatementList {
-  @override
-  List<Statement> build() {
-    return [];
-  }
-
-  Future<List<Statement>> fetch(String cardNumber) async {
-    final response = await http.get(Uri(
-      scheme: 'https',
-      host: 'card-management-eajwtocuqa-as.a.run.app',
-      path: '/v1/unbilled-statements',
-      queryParameters: {'cardNumber': cardNumber},
-    ));
-    final List<Statement> statement = await compute(parseStatement, response.body);
-    return statement;
+  final Map<String, dynamic> json = jsonDecode(response.body) as Map<String, dynamic>;
+  final List<Card> cardList = CardResponse.fromJson(json).cards;
+  if (cardList.isEmpty) {
+    return list;
+  } else {
+    for (final element in cardList) {
+      final response = await http.get(Uri(
+        scheme: 'https',
+        host: 'card-management-eajwtocuqa-as.a.run.app',
+        path: '/v1/unbilled-statements',
+        queryParameters: {'cardNumber': element.cardNumber},
+      ));
+      final List<Statement> unbilledStatement = await compute(parseStatement, response.body);
+      list.add(CardWithStatement(card: element, unbilledStatement: unbilledStatement));
+    }
+    return list;
   }
 }
