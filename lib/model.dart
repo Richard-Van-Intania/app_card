@@ -56,4 +56,4 @@ class CardWithStatement {
   final Map<String, List<Statement>> billedStatement;
 }
 
-const List<String> list = <String>['092023', '082023', '072023', '062023', '052023', '042023', '032023'];
+const List<String> dropdownList = <String>['092023', '082023', '072023', '062023', '052023', '042023', '032023'];

@@ -51,3 +51,11 @@ class CurrentCardIndex extends _$CurrentCardIndex {
 
   void update(int index) => state = index;
 }
+
+@riverpod
+class DropdownMenuList extends _$DropdownMenuList {
+  @override
+  String build() => dropdownList.first;
+
+  void select(String value) => state = value;
+}

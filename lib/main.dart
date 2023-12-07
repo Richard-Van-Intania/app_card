@@ -34,8 +34,6 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
   late final TabController tabController;
   final PageController controller = PageController(keepPage: true);
 
-  late String dropdownValue = list.first;
-
   @override
   void initState() {
     super.initState();
@@ -53,6 +51,7 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
   Widget build(BuildContext context) {
     final AsyncValue<List<CardWithStatement>> cardList = ref.watch(fetchCardListProvider);
     final int currentCardIndex = ref.watch(currentCardIndexProvider);
+    final String dropdownString = ref.watch(dropdownMenuListProvider);
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -172,15 +171,14 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
                                       Text('STATEMENT OF'),
                                       Spacer(),
                                       DropdownMenu<String>(
-                                        initialSelection: list.first,
+                                        initialSelection: dropdownString,
                                         onSelected: (String? value) {
-                                          setState(() {
-                                            dropdownValue = value!;
-                                          });
+                                          ref.read(dropdownMenuListProvider.notifier).select(value!);
                                         },
-                                        dropdownMenuEntries: list.map<DropdownMenuEntry<String>>((String value) {
+                                        dropdownMenuEntries: dropdownList.map<DropdownMenuEntry<String>>((String value) {
                                           return DropdownMenuEntry<String>(value: value, label: value);
                                         }).toList(),
+                                        enableSearch: false,
                                       )
                                     ],
                                   ),
@@ -195,19 +193,19 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
                                           children: [
                                             Row(
                                               children: [
-                                                Text(value[currentCardIndex].billedStatement[dropdownValue]![index].description),
+                                                Text(value[currentCardIndex].billedStatement[dropdownString]![index].description),
                                                 Spacer(),
-                                                Text(value[currentCardIndex].billedStatement[dropdownValue]![index].amount.toString()),
+                                                Text(value[currentCardIndex].billedStatement[dropdownString]![index].amount.toString()),
                                               ],
                                             ),
-                                            Text(value[currentCardIndex].billedStatement[dropdownValue]![index].statementDate),
+                                            Text(value[currentCardIndex].billedStatement[dropdownString]![index].statementDate),
                                           ],
                                         );
                                       },
                                       separatorBuilder: (BuildContext context, int index) {
                                         return const Divider();
                                       },
-                                      itemCount: value[currentCardIndex].billedStatement[dropdownValue]!.length,
+                                      itemCount: value[currentCardIndex].billedStatement[dropdownString]!.length,
                                     ),
                                   ),
                                 ],

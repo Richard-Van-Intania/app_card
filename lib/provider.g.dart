@@ -32,5 +32,18 @@ final currentCardIndexProvider = AutoDisposeNotifierProvider<CurrentCardIndex, i
 );
 
 typedef _$CurrentCardIndex = AutoDisposeNotifier<int>;
+String _$dropdownMenuListHash() => r'cc5cabce7ff496e43985219c5207fd64148a8cab';
+
+/// See also [DropdownMenuList].
+@ProviderFor(DropdownMenuList)
+final dropdownMenuListProvider = AutoDisposeNotifierProvider<DropdownMenuList, String>.internal(
+  DropdownMenuList.new,
+  name: r'dropdownMenuListProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$dropdownMenuListHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$DropdownMenuList = AutoDisposeNotifier<String>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
