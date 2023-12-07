@@ -136,9 +136,9 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
                                     ),
                                     Row(
                                       children: [
-                                        Text(value[currentCardIndex].card.statementDate),
+                                        Text(DateFormat('d MMM y').format(DateTime.parse(value[currentCardIndex].card.statementDate))),
                                         Spacer(),
-                                        Text('duedate'),
+                                        Text(DateFormat('d MMM y').format(DateTime.parse(value[currentCardIndex].card.dueDate))),
                                       ],
                                     ),
                                   ],
@@ -155,7 +155,7 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
                                     Row(
                                       children: [Text(value[currentCardIndex].unbilledStatement[index].description), Spacer(), Text(value[currentCardIndex].unbilledStatement[index].amount.toString())],
                                     ),
-                                    Text(value[currentCardIndex].unbilledStatement[index].statementDate)
+                                    Text(DateFormat('d MMM').format(DateTime.parse(value[currentCardIndex].unbilledStatement[index].statementDate))),
                                   ],
                                 );
                               },
@@ -187,7 +187,6 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
                                   const Divider(),
                                   Expanded(
                                     child: ListView.separated(
-                                      padding: const EdgeInsets.all(16.0),
                                       itemBuilder: (BuildContext context, int index) {
                                         return Column(
                                           mainAxisSize: MainAxisSize.min,
@@ -200,7 +199,7 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
                                                 Text(value[currentCardIndex].billedStatement[currentDropdownSelect]![index].amount.toString()),
                                               ],
                                             ),
-                                            Text(value[currentCardIndex].billedStatement[currentDropdownSelect]![index].statementDate),
+                                            Text(DateFormat('d MMM').format(DateTime.parse(value[currentCardIndex].billedStatement[currentDropdownSelect]![index].statementDate))),
                                           ],
                                         );
                                       },
@@ -224,13 +223,7 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        final date = DateTime(2023, int.parse(currentDropdownSelect[1]));
-        final String text = DateFormat.yMMM().format(DateTime(2023, int.parse(currentDropdownSelect[1])));
-
-        final dt = DateTime.parse('2023-08-11T18:15:00');
-        print(dt);
-      }),
+      floatingActionButton: FloatingActionButton(onPressed: () {}),
     );
   }
 }
