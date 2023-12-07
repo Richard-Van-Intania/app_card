@@ -50,8 +50,10 @@ List<Statement> parseStatement(String responseBody) {
 }
 
 class CardWithStatement {
-  CardWithStatement({required this.card, required this.unbilledStatement});
+  CardWithStatement({required this.card, required this.unbilledStatement, required this.billedStatement});
   final Card card;
   final List<Statement> unbilledStatement;
-  List<Statement> billedStatement = [];
+  final Map<String, List<Statement>> billedStatement;
 }
+
+const List<String> list = <String>['092023', '082023', '072023', '062023', '052023', '042023', '032023'];

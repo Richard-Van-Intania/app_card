@@ -34,7 +34,6 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
   late final TabController tabController;
   final PageController controller = PageController(keepPage: true);
 
-  List<String> list = <String>['One', 'Two', 'Three', 'Four'];
   late String dropdownValue = list.first;
 
   @override
@@ -195,16 +194,20 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Row(
-                                              children: [Text(value[currentCardIndex].billedStatement[index].description), Spacer(), Text(value[currentCardIndex].billedStatement[index].amount.toString())],
+                                              children: [
+                                                Text(value[currentCardIndex].billedStatement[dropdownValue]![index].description),
+                                                Spacer(),
+                                                Text(value[currentCardIndex].billedStatement[dropdownValue]![index].amount.toString()),
+                                              ],
                                             ),
-                                            Text(value[currentCardIndex].billedStatement[index].statementDate)
+                                            Text(value[currentCardIndex].billedStatement[dropdownValue]![index].statementDate),
                                           ],
                                         );
                                       },
                                       separatorBuilder: (BuildContext context, int index) {
                                         return const Divider();
                                       },
-                                      itemCount: value[currentCardIndex].billedStatement.length,
+                                      itemCount: value[currentCardIndex].billedStatement[dropdownValue]!.length,
                                     ),
                                   ),
                                 ],
@@ -221,7 +224,7 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {}),
+      // floatingActionButton: FloatingActionButton(onPressed: () {}),
     );
   }
 }

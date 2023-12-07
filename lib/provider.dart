@@ -27,36 +27,20 @@ Future<List<CardWithStatement>> fetchCardList(FetchCardListRef ref) async {
         queryParameters: {'cardNumber': element.cardNumber},
       ));
       final List<Statement> unbilledStatement = await compute(parseStatement, response.body);
-      list.add(CardWithStatement(card: element, unbilledStatement: unbilledStatement));
+      Map<String, List<Statement>> billedStatement = {};
+      for (var i = 9; i > 2; i--) {
+        final response = await http.get(Uri(
+          scheme: 'https',
+          host: 'card-management-eajwtocuqa-as.a.run.app',
+          path: '/v1/billed-statements',
+          queryParameters: {'cardNumber': element.cardNumber, 'asOf': '0${i}2023'},
+        ));
+        final List<Statement> statement = await compute(parseStatement, response.body);
+        billedStatement.addAll({'0${i}2023': statement});
+      }
+      list.add(CardWithStatement(card: element, unbilledStatement: unbilledStatement, billedStatement: billedStatement));
     }
     return list;
-  }
-}
-
-@riverpod
-class BilledStatementList extends _$BilledStatementList {
-  @override
-  Future<List<Statement>> build(String cardNumber) async {
-    final response = await http.get(Uri(
-      scheme: 'https',
-      host: 'card-management-eajwtocuqa-as.a.run.app',
-      path: '/v1/billed-statements',
-      queryParameters: {'cardNumber': cardNumber, 'asOf': '092023'},
-    ));
-    final List<Statement> billedStatement = await compute(parseStatement, response.body);
-    return billedStatement;
-  }
-
-  Future<void> fetchBilledStatement(String cardNumber, String asOf) async {
-    final response = await http.get(Uri(
-      scheme: 'https',
-      host: 'card-management-eajwtocuqa-as.a.run.app',
-      path: '/v1/billed-statements',
-      queryParameters: {'cardNumber': cardNumber, 'asOf': asOf},
-    ));
-    final List<Statement> billedStatement = await compute(parseStatement, response.body);
-    state = AsyncData(billedStatement);
-    ref.notifyListeners();
   }
 }
 

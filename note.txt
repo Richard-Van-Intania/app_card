@@ -1,3 +1,0 @@
-  final AsyncValue<List<Statement>> billedList = ref.watch(billedStatementListProvider('4568111122223333'));
-
-    ref.read(billedStatementListProvider('4568111122223333').notifier).fetchBilledStatement('4568111122223333', '072023');
