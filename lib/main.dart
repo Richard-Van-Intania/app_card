@@ -34,6 +34,7 @@ class HomePage extends StatefulHookConsumerWidget {
 class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMixin {
   late final TabController tabController;
   final PageController controller = PageController(keepPage: true);
+  final NumberFormat numberFormat = NumberFormat.decimalPattern('en_us');
 
   @override
   void initState() {
@@ -112,9 +113,9 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
                                     ),
                                     Row(
                                       children: [
-                                        Text(value[currentCardIndex].card.availableCredit.toString()),
+                                        Text(numberFormat.format(value[currentCardIndex].card.availableCredit)),
                                         Spacer(),
-                                        Text(value[currentCardIndex].card.creditLimit.toString()),
+                                        Text(numberFormat.format(value[currentCardIndex].card.creditLimit)),
                                       ],
                                     ),
                                     SizedBox(
@@ -125,9 +126,9 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
                                     ),
                                     Row(
                                       children: [
-                                        Text(value[currentCardIndex].card.minPay.toString()),
+                                        Text(numberFormat.format(value[currentCardIndex].card.availableCredit)),
                                         Spacer(),
-                                        Text(value[currentCardIndex].card.fullPay.toString()),
+                                        Text(numberFormat.format(value[currentCardIndex].card.fullPay)),
                                       ],
                                     ),
                                     const Divider(),
@@ -153,7 +154,7 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
-                                      children: [Text(value[currentCardIndex].unbilledStatement[index].description), Spacer(), Text(value[currentCardIndex].unbilledStatement[index].amount.toString())],
+                                      children: [Text(value[currentCardIndex].unbilledStatement[index].description), Spacer(), Text('${numberFormat.format(value[currentCardIndex].unbilledStatement[index].amount)} THB')],
                                     ),
                                     Text(DateFormat('d MMM').format(DateTime.parse(value[currentCardIndex].unbilledStatement[index].statementDate))),
                                   ],
@@ -196,7 +197,7 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
                                               children: [
                                                 Text(value[currentCardIndex].billedStatement[currentDropdownSelect]![index].description),
                                                 Spacer(),
-                                                Text(value[currentCardIndex].billedStatement[currentDropdownSelect]![index].amount.toString()),
+                                                Text('${numberFormat.format(value[currentCardIndex].billedStatement[currentDropdownSelect]![index].amount)} THB'),
                                               ],
                                             ),
                                             Text(DateFormat('d MMM').format(DateTime.parse(value[currentCardIndex].billedStatement[currentDropdownSelect]![index].statementDate))),
