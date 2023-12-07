@@ -31,14 +31,6 @@ class HomePage extends StatefulHookConsumerWidget {
 
 class _HomePageState extends ConsumerState<HomePage> {
   @override
-  void initState() {
-    super.initState();
-    ref.listenManual(fetchCardListProvider, (previous, next) {
-      print('debug');
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     final AsyncValue<List<CardWithStatement>> cardList = ref.watch(fetchCardListProvider);
     final AsyncValue<List<Statement>> billedList = ref.watch(billedStatementListProvider('4568111122223333'));
@@ -50,10 +42,8 @@ class _HomePageState extends ConsumerState<HomePage> {
           _ => const CircularProgressIndicator(),
         },
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () async {
-        // final List<Statement> list = await ref.read(billedStatementListProvider('4568111122223333').notifier).fetchBilledStatement('4568111122223333', '082023');
-        // print(list.length);
-        ref.read(billedStatementListProvider('4568111122223333').notifier).fetchBilledStatement('4568111122223333', '082023');
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        ref.read(billedStatementListProvider('4568111122223333').notifier).fetchBilledStatement('4568111122223333', '072023');
       }),
     );
   }

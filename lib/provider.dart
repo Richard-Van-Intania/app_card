@@ -47,14 +47,15 @@ class BilledStatementList extends _$BilledStatementList {
     return billedStatement;
   }
 
-  Future<List<Statement>> fetchBilledStatement(String cardNumber, String asOf) async {
+  Future<void> fetchBilledStatement(String cardNumber, String asOf) async {
     final response = await http.get(Uri(
       scheme: 'https',
       host: 'card-management-eajwtocuqa-as.a.run.app',
       path: '/v1/billed-statements',
-      queryParameters: {'cardNumber': cardNumber, 'asOf': '092023'},
+      queryParameters: {'cardNumber': cardNumber, 'asOf': asOf},
     ));
     final List<Statement> billedStatement = await compute(parseStatement, response.body);
-    return billedStatement;
+    state = AsyncData(billedStatement);
+    ref.notifyListeners();
   }
 }

@@ -19,7 +19,7 @@ final fetchCardListProvider = AutoDisposeFutureProvider<List<CardWithStatement>>
 );
 
 typedef FetchCardListRef = AutoDisposeFutureProviderRef<List<CardWithStatement>>;
-String _$billedStatementListHash() => r'1e904dce27c50809c4bde41e01b6bfddc6c038b0';
+String _$billedStatementListHash() => r'4a1042b7aa0060f1d9d25a88798d45be3ca95df7';
 
 /// Copied from Dart SDK
 class _SystemHash {
