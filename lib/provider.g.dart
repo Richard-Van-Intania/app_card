@@ -173,5 +173,19 @@ class _BilledStatementListProviderElement extends AutoDisposeAsyncNotifierProvid
   @override
   String get cardNumber => (origin as BilledStatementListProvider).cardNumber;
 }
+
+String _$currentCardIndexHash() => r'03a9bc088a6f47846a062c89c8aa189b160ec3ec';
+
+/// See also [CurrentCardIndex].
+@ProviderFor(CurrentCardIndex)
+final currentCardIndexProvider = AutoDisposeNotifierProvider<CurrentCardIndex, int>.internal(
+  CurrentCardIndex.new,
+  name: r'currentCardIndexProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$currentCardIndexHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$CurrentCardIndex = AutoDisposeNotifier<int>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -59,3 +59,11 @@ class BilledStatementList extends _$BilledStatementList {
     ref.notifyListeners();
   }
 }
+
+@riverpod
+class CurrentCardIndex extends _$CurrentCardIndex {
+  @override
+  int build() => 0;
+
+  void update(int index) => state = index;
+}

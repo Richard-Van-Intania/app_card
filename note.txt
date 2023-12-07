@@ -1,16 +1,3 @@
-        onPressed: () async {
-          // final url = Uri.https('card-management-eajwtocuqa-as.a.run.app', '/v1/unbilled-statements', {'cardNumber': '4568111122223333'});
-          // final response = await http.get(Uri.https('card-management-eajwtocuqa-as.a.run.app', '/v1/cards/1111111111111'));
-          // final response = await http.get(Uri.https('card-management-eajwtocuqa-as.a.run.app', '/v1/unbilled-statements', {'cardNumber': '4568111122223333'}));
-          final response = await http.get(Uri.https('card-management-eajwtocuqa-as.a.run.app', '/v1/billed-statements', {'cardNumber': '4568111122223333', 'asOf': '092023'}));
-          // print('Response status: ${response.statusCode}');
-          // final json = jsonDecode(response.body) as List<Statement>;
-          // // final statement = Statement.fromJson(json);
-          // print(json.length);
-          // List<Statement> statement = (jsonDecode(response.body) as List).map((data) => Statement.fromJson(data)).toList();
-          // final List<Statement> statement = parseStatement(response.body);
-          final List<Statement> statement0 = await compute(parseStatement, response.body);
-          print(statement0.first.description);
-        },
+  final AsyncValue<List<Statement>> billedList = ref.watch(billedStatementListProvider('4568111122223333'));
 
-          // final response = await http.get(Uri.https('card-management-eajwtocuqa-as.a.run.app', '/v1/cards/1111111111111'));
+    ref.read(billedStatementListProvider('4568111122223333').notifier).fetchBilledStatement('4568111122223333', '072023');
