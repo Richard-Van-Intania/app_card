@@ -1,4 +1,5 @@
 import 'package:app_card/provider.dart';
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -16,7 +17,7 @@ class MyApp extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellowAccent),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 96, 108, 139)),
         useMaterial3: true,
       ),
       home: const HomePage(),
@@ -70,9 +71,7 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
                           controller: controller,
                           itemCount: value.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return Image.network(
-                              value[index].card.cardImageUrl,
-                            );
+                            return Image.network(value[index].card.cardImageUrl);
                           },
                           onPageChanged: (int value) {
                             ref.read(currentCardIndexProvider.notifier).update(value);
@@ -88,15 +87,9 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
                       TabBar(
                         controller: tabController,
                         tabs: const <Widget>[
-                          Tab(
-                            child: Text('ACCOUNT INFO'),
-                          ),
-                          Tab(
-                            child: Text('UNBILLED'),
-                          ),
-                          Tab(
-                            child: Text('BILLED'),
-                          ),
+                          Tab(child: FittedBox(child: Text('ACCOUNT INFO', style: TextStyle(fontWeight: FontWeight.bold)))),
+                          Tab(child: FittedBox(child: Text('UNBILLED', style: TextStyle(fontWeight: FontWeight.bold)))),
+                          Tab(child: FittedBox(child: Text('BILLED', style: TextStyle(fontWeight: FontWeight.bold)))),
                         ],
                       ),
                       Expanded(
@@ -108,38 +101,35 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
                                 padding: const EdgeInsets.all(16.0),
                                 child: Column(
                                   children: [
-                                    Row(
-                                      children: [Text('AVAILABLE CREDIT'), Spacer(), Text('CREDIT LIMIT')],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(numberFormat.format(value[currentCardIndex].card.availableCredit)),
-                                        Spacer(),
-                                        Text(numberFormat.format(value[currentCardIndex].card.creditLimit)),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 32.0,
-                                    ),
-                                    Row(
-                                      children: [Text('MIN PAY'), Spacer(), Text('FULL PAY')],
-                                    ),
+                                    const Row(children: [Text('AVAILABLE CREDIT'), Spacer(), Text('CREDIT LIMIT')]),
+                                    const SizedBox(height: 8.0),
                                     Row(
                                       children: [
-                                        Text(numberFormat.format(value[currentCardIndex].card.availableCredit)),
-                                        Spacer(),
-                                        Text(numberFormat.format(value[currentCardIndex].card.fullPay)),
+                                        Text(numberFormat.format(value[currentCardIndex].card.availableCredit), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 27.0)),
+                                        const Spacer(),
+                                        Text(numberFormat.format(value[currentCardIndex].card.creditLimit), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 27.0)),
                                       ],
                                     ),
+                                    const SizedBox(height: 56.0),
+                                    const Row(children: [Text('MIN PAY'), Spacer(), Text('FULL PAY')]),
+                                    const SizedBox(height: 8.0),
+                                    Row(
+                                      children: [
+                                        Text(numberFormat.format(value[currentCardIndex].card.minPay), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0)),
+                                        const Spacer(),
+                                        Text(numberFormat.format(value[currentCardIndex].card.fullPay), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0)),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 8.0),
                                     const Divider(),
-                                    Row(
-                                      children: [Text('STATEMENT DATE'), Spacer(), Text('DUE DATE')],
-                                    ),
+                                    const SizedBox(height: 8.0),
+                                    const Row(children: [Text('STATEMENT DATE'), Spacer(), Text('DUE DATE')]),
+                                    const SizedBox(height: 8.0),
                                     Row(
                                       children: [
-                                        Text(DateFormat('d MMM y').format(DateTime.parse(value[currentCardIndex].card.statementDate))),
-                                        Spacer(),
-                                        Text(DateFormat('d MMM y').format(DateTime.parse(value[currentCardIndex].card.dueDate))),
+                                        Text(DateFormat('d MMM y').format(DateTime.parse(value[currentCardIndex].card.statementDate)), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0)),
+                                        const Spacer(),
+                                        Text(DateFormat('d MMM y').format(DateTime.parse(value[currentCardIndex].card.dueDate)), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0)),
                                       ],
                                     ),
                                   ],
@@ -154,9 +144,14 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
-                                      children: [Text(value[currentCardIndex].unbilledStatement[index].description), Spacer(), Text('${numberFormat.format(value[currentCardIndex].unbilledStatement[index].amount)} THB')],
+                                      children: [
+                                        FittedBox(child: Text(value[currentCardIndex].unbilledStatement[index].description, style: const TextStyle(fontWeight: FontWeight.bold))),
+                                        const Spacer(),
+                                        Text('${numberFormat.format(value[currentCardIndex].unbilledStatement[index].amount)} THB', style: const TextStyle(fontWeight: FontWeight.bold)),
+                                      ],
                                     ),
-                                    Text(DateFormat('d MMM').format(DateTime.parse(value[currentCardIndex].unbilledStatement[index].statementDate))),
+                                    Text(DateFormat('d MMM').format(DateTime.parse(value[currentCardIndex].unbilledStatement[index].statementDate)), style: TextStyle(color: Theme.of(context).colorScheme.secondary)),
+                                    const SizedBox(height: 8.0),
                                   ],
                                 );
                               },
@@ -171,8 +166,8 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
                                 children: [
                                   Row(
                                     children: [
-                                      Text('STATEMENT OF'),
-                                      Spacer(),
+                                      const Text('STATEMENT OF', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0)),
+                                      const Spacer(),
                                       DropdownMenu<String>(
                                         initialSelection: currentDropdownSelect,
                                         onSelected: (String? value) {
@@ -182,10 +177,13 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
                                           return DropdownMenuEntry<String>(value: value, label: DateFormat.yMMM().format(DateTime(2023, int.parse(value[1]))));
                                         }).toList(),
                                         enableSearch: false,
+                                        textStyle: const TextStyle(fontWeight: FontWeight.bold),
                                       )
                                     ],
                                   ),
-                                  const Divider(),
+                                  const SizedBox(height: 16.0),
+                                  const DottedLine(dashColor: Colors.grey),
+                                  const SizedBox(height: 16.0),
                                   Expanded(
                                     child: ListView.separated(
                                       itemBuilder: (BuildContext context, int index) {
@@ -195,12 +193,13 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
                                           children: [
                                             Row(
                                               children: [
-                                                Text(value[currentCardIndex].billedStatement[currentDropdownSelect]![index].description),
-                                                Spacer(),
-                                                Text('${numberFormat.format(value[currentCardIndex].billedStatement[currentDropdownSelect]![index].amount)} THB'),
+                                                Text(value[currentCardIndex].billedStatement[currentDropdownSelect]![index].description, style: const TextStyle(fontWeight: FontWeight.bold)),
+                                                const Spacer(),
+                                                Text('${numberFormat.format(value[currentCardIndex].billedStatement[currentDropdownSelect]![index].amount)} THB', style: const TextStyle(fontWeight: FontWeight.bold)),
                                               ],
                                             ),
-                                            Text(DateFormat('d MMM').format(DateTime.parse(value[currentCardIndex].billedStatement[currentDropdownSelect]![index].statementDate))),
+                                            Text(DateFormat('d MMM').format(DateTime.parse(value[currentCardIndex].billedStatement[currentDropdownSelect]![index].statementDate)), style: TextStyle(color: Theme.of(context).colorScheme.secondary)),
+                                            const SizedBox(height: 8.0),
                                           ],
                                         );
                                       },
@@ -224,7 +223,6 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {}),
     );
   }
 }
