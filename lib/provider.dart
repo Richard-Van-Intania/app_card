@@ -28,7 +28,7 @@ Future<List<CardWithStatement>> fetchCardList(FetchCardListRef ref) async {
       ));
       final List<Statement> unbilledStatement = await compute(parseStatement, response.body);
       Map<String, List<Statement>> billedStatement = {};
-      for (var i = 9; i > 2; i--) {
+      for (var i = 9; i > 3; i--) {
         final response = await http.get(Uri(
           scheme: 'https',
           host: 'card-management-eajwtocuqa-as.a.run.app',
@@ -63,7 +63,7 @@ class DropdownMenuList extends _$DropdownMenuList {
 @riverpod
 List<String> generateDropdownList(GenerateDropdownListRef ref) {
   List<String> dropdownList = <String>[];
-  for (var i = 9; i > 2; i--) {
+  for (var i = 9; i > 3; i--) {
     dropdownList.add('0${i}2023');
   }
   return dropdownList;
