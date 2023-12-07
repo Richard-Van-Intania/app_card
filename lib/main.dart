@@ -51,7 +51,8 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
   Widget build(BuildContext context) {
     final AsyncValue<List<CardWithStatement>> cardList = ref.watch(fetchCardListProvider);
     final int currentCardIndex = ref.watch(currentCardIndexProvider);
-    final String dropdownString = ref.watch(dropdownMenuListProvider);
+    final String currentDropdownSelect = ref.watch(dropdownMenuListProvider);
+    final List<String> dropdownList = ref.watch(generateDropdownListProvider);
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -171,7 +172,7 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
                                       Text('STATEMENT OF'),
                                       Spacer(),
                                       DropdownMenu<String>(
-                                        initialSelection: dropdownString,
+                                        initialSelection: currentDropdownSelect,
                                         onSelected: (String? value) {
                                           ref.read(dropdownMenuListProvider.notifier).select(value!);
                                         },
@@ -193,19 +194,19 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
                                           children: [
                                             Row(
                                               children: [
-                                                Text(value[currentCardIndex].billedStatement[dropdownString]![index].description),
+                                                Text(value[currentCardIndex].billedStatement[currentDropdownSelect]![index].description),
                                                 Spacer(),
-                                                Text(value[currentCardIndex].billedStatement[dropdownString]![index].amount.toString()),
+                                                Text(value[currentCardIndex].billedStatement[currentDropdownSelect]![index].amount.toString()),
                                               ],
                                             ),
-                                            Text(value[currentCardIndex].billedStatement[dropdownString]![index].statementDate),
+                                            Text(value[currentCardIndex].billedStatement[currentDropdownSelect]![index].statementDate),
                                           ],
                                         );
                                       },
                                       separatorBuilder: (BuildContext context, int index) {
                                         return const Divider();
                                       },
-                                      itemCount: value[currentCardIndex].billedStatement[dropdownString]!.length,
+                                      itemCount: value[currentCardIndex].billedStatement[currentDropdownSelect]!.length,
                                     ),
                                   ),
                                 ],

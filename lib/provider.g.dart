@@ -19,6 +19,19 @@ final fetchCardListProvider = AutoDisposeFutureProvider<List<CardWithStatement>>
 );
 
 typedef FetchCardListRef = AutoDisposeFutureProviderRef<List<CardWithStatement>>;
+String _$generateDropdownListHash() => r'a96f27b87b826996d1ca3c97ac4b012ae37b91ba';
+
+/// See also [generateDropdownList].
+@ProviderFor(generateDropdownList)
+final generateDropdownListProvider = AutoDisposeProvider<List<String>>.internal(
+  generateDropdownList,
+  name: r'generateDropdownListProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$generateDropdownListHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef GenerateDropdownListRef = AutoDisposeProviderRef<List<String>>;
 String _$currentCardIndexHash() => r'03a9bc088a6f47846a062c89c8aa189b160ec3ec';
 
 /// See also [CurrentCardIndex].
@@ -32,7 +45,7 @@ final currentCardIndexProvider = AutoDisposeNotifierProvider<CurrentCardIndex, i
 );
 
 typedef _$CurrentCardIndex = AutoDisposeNotifier<int>;
-String _$dropdownMenuListHash() => r'cc5cabce7ff496e43985219c5207fd64148a8cab';
+String _$dropdownMenuListHash() => r'27ac30458196d2825cbde26d2849a62938001639';
 
 /// See also [DropdownMenuList].
 @ProviderFor(DropdownMenuList)

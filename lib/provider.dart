@@ -55,7 +55,16 @@ class CurrentCardIndex extends _$CurrentCardIndex {
 @riverpod
 class DropdownMenuList extends _$DropdownMenuList {
   @override
-  String build() => dropdownList.first;
+  String build() => ref.watch(generateDropdownListProvider).first;
 
   void select(String value) => state = value;
+}
+
+@riverpod
+List<String> generateDropdownList(GenerateDropdownListRef ref) {
+  List<String> dropdownList = <String>[];
+  for (var i = 9; i > 2; i--) {
+    dropdownList.add('0${i}2023');
+  }
+  return dropdownList;
 }
