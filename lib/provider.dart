@@ -7,12 +7,12 @@ import 'model.dart';
 part 'provider.g.dart';
 
 @riverpod
-Future<List<CardWithStatement>> fetchCardList(FetchCardListRef ref) async {
+Future<List<CardWithStatement>> fetchCardList(FetchCardListRef ref, String citizenId) async {
   List<CardWithStatement> list = [];
   final response = await http.get(Uri(
     scheme: 'https',
     host: 'card-management-eajwtocuqa-as.a.run.app',
-    path: '/v1/cards/1111111111111',
+    path: '/v1/cards/$citizenId',
   ));
   final Map<String, dynamic> json = jsonDecode(response.body) as Map<String, dynamic>;
   final List<Card> cardList = CardResponse.fromJson(json).cards;

@@ -10,6 +10,8 @@ void main() {
   runApp(const ProviderScope(child: MyApp()));
 }
 
+const String citizenId = '1111111111111';
+
 class MyApp extends HookConsumerWidget {
   const MyApp({super.key});
 
@@ -52,7 +54,7 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    final AsyncValue<List<CardWithStatement>> cardList = ref.watch(fetchCardListProvider);
+    final AsyncValue<List<CardWithStatement>> cardList = ref.watch(fetchCardListProvider(citizenId));
     final int currentCardIndex = ref.watch(currentCardIndexProvider);
     final String currentDropdownSelect = ref.watch(dropdownMenuListProvider);
     final List<String> dropdownList = ref.watch(generateDropdownListProvider);
